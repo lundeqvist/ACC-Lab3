@@ -18,4 +18,4 @@ def parse():
 							pronouns[p] += 1
 			except:
 				pass
-	return str(pronouns)
+	return pronouns
