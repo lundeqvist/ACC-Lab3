@@ -12,4 +12,5 @@ while result.ready() == False:
 	k = 1
 
 with open('test.txt', 'w+') as f:
-	f.write(str(result))
+	f.write(result)
+m = 1
