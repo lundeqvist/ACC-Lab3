@@ -1,12 +1,15 @@
+import os
+from tasks import parse
+
 
 result = parse.delay()
 print result.ready()
 
-with open('home/ubuntu/testt.txt', 'w+') as f:
+with open('testt.txt', 'w+') as f:
 	f.write(str(result.ready()))
 
 while result.ready() == False:
 	k = 1
 
-with open('home/ubuntu/test.txt', 'w+') as f:
-	f.write(result)
+with open('test.txt', 'w+') as f:
+	f.write(str(result))
