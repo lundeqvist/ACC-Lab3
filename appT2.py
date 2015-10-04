@@ -12,7 +12,7 @@ def app():
 		tasks.append(parse.delay(baseurl + tweets))
 	get = [t.get() for t in tasks]
 
-	p = collections.Counter({})
+	p = Counter({})
 	for t in get:
 		p.update(t)
 
