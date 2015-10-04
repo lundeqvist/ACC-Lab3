@@ -3,7 +3,7 @@ import urllib2, json
 import glob
 from celery import Celery
 
-app = Celery('tasks', backend='amqp', broker='amqp://elias:pass@130.238.29.126:5672/geijer')
+app = Celery('tasks', backend='amqp', broker='amqp://elias:pass@130.238.29.100:5672/geijer')
 
 @app.task
 def parse(url):
