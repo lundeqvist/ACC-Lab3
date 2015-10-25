@@ -1,7 +1,7 @@
 import os, subprocess, celery
 from celery import group
-from tasks import parse1
-from remote import parse2
+from tasks1 import parse1
+from tasks2 import parse2
 from flask import Flask, jsonify
 from collections import Counter
 #import matplotlib.pyplot as pyplot
@@ -23,7 +23,7 @@ def parse_pronouns1():
 	y = [v / total_values for v in y_values]
 
 	'''
-	Add the following line to userdata-broker
+	Add the following line to userdata-broker.yml:
 	- pip install matplotlib
 	and install pkg-config in order to plot it from 
 	the broker

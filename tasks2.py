@@ -6,7 +6,7 @@ from celery import Celery
 
 
 
-app = Celery('tasks', backend='amqp', broker='amqp://elias:pass@' + os.environ['master_ip'] + ':5672/geijer')
+app = Celery('tasks2', backend='amqp', broker='amqp://elias:pass@' + os.environ['master_ip'] + ':5672/geijer')
 
 @app.task
 def parse2(url):

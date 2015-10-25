@@ -3,7 +3,7 @@ import json
 import glob
 from celery import Celery
 
-app = Celery('tasks', backend='amqp', broker='amqp://')
+app = Celery('tasks1', backend='amqp', broker='amqp://')
 
 @app.task
 def parse1():
