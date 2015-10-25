@@ -49,13 +49,12 @@ def parse_pronouns2(n_files):
 		job = group([parse2.s(baseurl + tweets) for tweets in ['tweets_0.txt']*n_files])
 		before = time.time()
 		result = job.apply_async()
-		elapsed_time = time.time() - before
-
+		
 		while result.ready() == False:
 			k = 1
 
 		answers = result.get()
-
+		elapsed_time = time.time() - before
 		pronouns = Counter({})
 		for t in answers:
 			pronouns.update(t)
