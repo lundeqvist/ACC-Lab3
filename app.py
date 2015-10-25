@@ -48,7 +48,7 @@ def parse_pronouns2():
 	job = group([parse2.s(baseurl + tweets) for tweets in tweets_files])
 	before = time.time()
 	result = job.apply_async()
-	elapsed_time = before - time.time()
+	elapsed_time = str(before - time.time())
 
 	while result.ready() == False:
 		k = 1
@@ -58,7 +58,7 @@ def parse_pronouns2():
 	pronouns = Counter({})
 	for t in answers:
 		pronouns.update(t)
-	pronouns.update({'time_taken': str(elapsed_time)})
+	pronouns.update({'time_taken': elapsed_time})
 	return jsonify(dict(pronouns)),200
 
 @app.route('/', methods=['GET'])
