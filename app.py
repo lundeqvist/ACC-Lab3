@@ -4,7 +4,7 @@ from tasks import parse1
 from remote import parse2
 from flask import Flask, jsonify
 from collections import Counter
-import matplotlib.pyplot as pyplot
+#import matplotlib.pyplot as pyplot
 
 app = Flask(__name__)
 
