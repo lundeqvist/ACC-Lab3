@@ -1,4 +1,4 @@
-import os, subprocess, celery
+import os, subprocess, celery, time
 from celery import group
 from tasks1 import parse1
 from tasks2 import parse2
@@ -46,7 +46,9 @@ def parse_pronouns2():
 					'tweets_15.txt', 'tweets_16.txt', 'tweets_17.txt', 'tweets_18.txt', 'tweets_19.txt']
 	
 	job = group([parse2.s(baseurl + tweets) for tweets in tweets_files])
+	before = time.time()
 	result = job.apply_async()
+	elapsed_time = before - time.time()
 
 	while result.ready() == False:
 		k = 1
@@ -57,7 +59,7 @@ def parse_pronouns2():
 	for t in answers:
 		pronouns.update(t)
 
-	return jsonify(dict(pronouns)),200
+	return jsonify(dict(pronouns))+'\n'+'time taken: '+str(elapsed_time),200
 
 @app.route('/', methods=['GET'])
 def test():
