@@ -37,31 +37,34 @@ def parse_pronouns1():
 	return jsonify(pronouns),200
 
 
-@app.route('/pronouns2', methods=['GET'])
+@app.route('/pronouns2/<n_files>', methods=['GET'])
 def parse_pronouns2():
-	baseurl = 'http://smog.uppmax.uu.se:8080/swift/v1/tweets/'
-	tweets_files = ['tweets_0.txt', 'tweets_1.txt', 'tweets_2.txt', 'tweets_3.txt', 'tweets_4.txt', 
-					'tweets_5.txt', 'tweets_6.txt', 'tweets_7.txt'] 
+	if n_files > 0 and n_files < 21:
+		baseurl = 'http://smog.uppmax.uu.se:8080/swift/v1/tweets/'
+		tweets_files = ['tweets_0.txt', 'tweets_1.txt', 'tweets_2.txt', 'tweets_3.txt', 'tweets_4.txt', 
+						'tweets_5.txt', 'tweets_6.txt', 'tweets_7.txt', 'tweets_8.txt', 'tweets_9.txt', 
+						'tweets_10.txt', 'tweets_11.txt', 'tweets_12.txt', 'tweets_13.txt', 'tweets_14.txt', 
+						'tweets_15.txt', 'tweets_16.txt', 'tweets_17.txt', 'tweets_18.txt', 'tweets_19.txt']
 
-	''', 'tweets_8.txt', 'tweets_9.txt', 
-	'tweets_10.txt', 'tweets_11.txt', 'tweets_12.txt', 'tweets_13.txt', 'tweets_14.txt', 
-	'tweets_15.txt', 'tweets_16.txt', 'tweets_17.txt', 'tweets_18.txt', 'tweets_19.txt']'''
-	
-	job = group([parse2.s(baseurl + tweets) for tweets in tweets_files])
-	before = time.time()
-	result = job.apply_async()
-	elapsed_time = before - time.time()
 
-	while result.ready() == False:
-		k = 1
+		
+		job = group([parse2.s(baseurl + tweets) for tweets in tweets_files[0:n_files-1]])
+		before = time.time()
+		result = job.apply_async()
+		elapsed_time = time.time() - before
 
-	answers = result.get()
+		while result.ready() == False:
+			k = 1
 
-	pronouns = Counter({})
-	for t in answers:
-		pronouns.update(t)
-	pronouns.update({'time_taken': elapsed_time})
-	return jsonify(dict(pronouns)),200
+		answers = result.get()
+
+		pronouns = Counter({})
+		for t in answers:
+			pronouns.update(t)
+		pronouns.update({'time_taken': elapsed_time})
+		return jsonify(dict(pronouns)),200
+	else:
+		return "Not valid amount of tweets"
 
 @app.route('/', methods=['GET'])
 def test():
