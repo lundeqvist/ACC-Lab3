@@ -58,8 +58,8 @@ def parse_pronouns2():
 	pronouns = Counter({})
 	for t in answers:
 		pronouns.update(t)
-
-	return jsonify(dict(pronouns))+'\n'+'time taken: '+str(elapsed_time),200
+	pronouns.update({'time_taken': str(elapsed_time)})
+	return jsonify(dict(pronouns)),200
 
 @app.route('/', methods=['GET'])
 def test():
