@@ -6,7 +6,7 @@ from celery import Celery
 
 
 
-app = Celery('tasks', backend='amqp', broker='amqp://elias:pass@130.238.29.191:5672/geijer')
+app = Celery('tasks', backend='amqp', broker='amqp://elias:pass@' + os.environ['master_ip'] + ':5672/geijer')
 
 @app.task
 def parse(url):
@@ -14,10 +14,11 @@ def parse(url):
 	pronouns = {"han":0, "hon":0, "den":0, "det":0, "denna":0, "denne":0, "hen":0}
 	for line in data:
 		try:
-			if json.loads(line)["retweeted"] == False:
-				tweet = json.loads(line)["text"].split()
+			tweet = json.loads(line)
+			if 'retweeted_status' not in tweet:
+				words = tweet["text"].split()
 				for p in pronouns.keys():
-					if p in tweet:
+					if p in words:
 						pronouns[p] += 1
 		except:
 			pass
