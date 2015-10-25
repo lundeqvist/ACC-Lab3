@@ -50,8 +50,7 @@ def parse_pronouns2():
 	job = group([parse2.s(baseurl + tweets) for tweets in tweets_files])
 	before = time.time()
 	result = job.apply_async()
-	time_after = before - time.time()
-	elapsed_time = str(time_after)
+	elapsed_time = before - time.time()
 
 	while result.ready() == False:
 		k = 1
