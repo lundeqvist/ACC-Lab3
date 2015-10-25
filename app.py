@@ -21,10 +21,18 @@ def parse_pronouns1():
 	total_values = float(sum(y_values))
 	x = [1,2,3,4,5,6,7]
 	y = [v / total_values for v in y_values]
-	pyplot.title('Pronouns')
-	pyplot.bar(x, y, align='center', width=0.65)
-	pyplot.xticks(x, x_keys)
-	pyplot.savefig('pronouns.png')
+
+	'''
+	Add the following line to userdata-broker
+	- pip install matplotlib
+	and install pkg-config in order to plot it from 
+	the broker
+	'''
+
+	#pyplot.title('Pronouns')
+	#pyplot.bar(x, y, align='center', width=0.65)
+	#pyplot.xticks(x, x_keys)
+	#pyplot.savefig('pronouns.png')
 
 	return jsonify(pronouns),200
 
