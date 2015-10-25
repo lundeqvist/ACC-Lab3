@@ -46,7 +46,7 @@ def parse_pronouns2(n_files):
 						'tweets_10.txt', 'tweets_11.txt', 'tweets_12.txt', 'tweets_13.txt', 'tweets_14.txt', 
 						'tweets_15.txt', 'tweets_16.txt', 'tweets_17.txt', 'tweets_18.txt', 'tweets_19.txt']
 		
-		job = group([parse2.s(baseurl + tweets) for tweets in tweets_files[0:n_files])
+		job = group([parse2.s(baseurl + tweets) for tweets in tweets_files[0:n_files]])
 		before = time.time()
 		result = job.apply_async()
 		
