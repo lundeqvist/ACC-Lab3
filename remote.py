@@ -26,5 +26,5 @@ def parse2(url):
 		except:
 			pass
 			
-	pronouns.update({'n_tweets'}: n)
+	pronouns.update({'n_tweets': n})
 	return pronouns
