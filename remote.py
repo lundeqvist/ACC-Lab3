@@ -16,7 +16,8 @@ def parse(url):
 		try:
 			tweet = json.loads(line)
 			if 'retweeted_status' not in tweet:
-				words = tweet["text"].split()
+				tweet_text = tweet["text"].lower()
+				words = tweet_text.split()
 				for p in pronouns.keys():
 					if p in words:
 						pronouns[p] += 1
