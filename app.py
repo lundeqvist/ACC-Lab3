@@ -37,11 +37,6 @@ def parse_pronouns1():
 	return jsonify(pronouns),200
 
 
-@app.route('/pronouns2/', methods=['GET'])
-def parse_pronouns2_default():
-	return parse_pronouns2(20)
-
-
 @app.route('/pronouns2/<int:n_files>', methods=['GET'])
 def parse_pronouns2(n_files):
 	if n_files > 0 and n_files < 21:
